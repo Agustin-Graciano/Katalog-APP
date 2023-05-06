@@ -4,8 +4,13 @@ module.exports = {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {},
+     options: {
+       safelist: ['v-button'], 
   },
-  plugins: [],
-}
+    theme: {
+      colors: {
+        'black': '#000000',
+        'white': '#FFFFFF'
+      },
+    }
+  }
