@@ -14,7 +14,7 @@
                    <img :src="product.imageUrl" alt="ProdImg" class="product-image px-2">
                     </a>
                   <h3 class="product-title px-2 center">{{ product.productName }}</h3>
-                  <p class="product-price center px-2 center">{{ product.price }} kr.</p>
+                  <p class="product-price center px-2 center">{{ product.price }} kr</p>
                   <button class="product-button rounded-xl px-2 center" @click="copyProduct(product)">Copy</button>
                 </div>
             </div>
