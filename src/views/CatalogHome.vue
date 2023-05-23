@@ -4,7 +4,7 @@
     <div class="flex bg-black opacity-70 w-full h-full justify-center">
       <div class="flex absolute items-center text-center">
         <h1 class="text-white text-3xl font-bold py-6 drop-shadow-sm">
-          Select your images to create your catalog!
+          Select an option to create your catalog!
         </h1>
       </div>
       <div
@@ -20,19 +20,18 @@
         </div>
         <div class="flex justify-around -mt-28 py-5 bg-black opacity-90">
           <v-button
-            v-if="!selectedImages.length"
-            @click="handleButtonClick"
+            @click="goToPresentationSection"
             class="button-styling text-white font-semibold"
           >
-            Select Local Images
+           Work with Local files
           </v-button>
           <v-button
             type="button"
             v-if="!selectedImages.length"
             class="button-styling text-white font-semibold" 
-            :disabled="true"
+            @click="goToPresentationSectionDB"
           >
-            Select Images from DB
+           Work with an integrated DB
           </v-button>
           <v-button
             v-if="selectedImages.length"
@@ -70,35 +69,21 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      addImages: 'addImages',
-    }),
-    handleButtonClick() {
-      const input = document.createElement("input");
-      input.type = "file";
-      input.accept = "image/*";
-      input.multiple = true;
-      input.onchange = (e) => {
-        const files = e.target.files;
-        this.addImages(Array.from(files)); // Dispatch the "addImages" action with the selected files
-      };
-      input.click();
-    },
     goToPresentationSection() {
-      if (this.selectedImages.length > 0) {
         this.$router.push({
           name: "PresentationSection",
           params: { images: this.selectedImages },
           query: { step: 2 } // Pass a query parameter to indicate the step
         });
+      },
+      goToPresentationSectionDB() {
+        this.$router.push({
+          name: "PresentationSectionDB",
+          params: { images: this.selectedImages },
+          query: { step: 2 } // Pass a query parameter to indicate the step
+        });
       }
     },
-  },
-  watch: {
-    images(newImages) {
-      this.selectedImages = newImages;
-    },
-  },
 };
 </script>
 

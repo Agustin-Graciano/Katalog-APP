@@ -1,28 +1,36 @@
 <template>
-  <div>
-    <TopHeader />
-    <div class="flex justify-center items-center">
+  <TopHeader />
+  <div class="flex justify-center items-center">
       <div class="flex bg-black opacity-70 w-full h-full justify-center z-20">
         <div class="flex absolute items-center text-center">
-          <h1 class="text-white text-3xl font-bold py-6 drop-shadow-sm">
-            Add an index catalog
+          <h1 class="text-white text-3xl font-bold my-5 drop-shadow-sm">
+            Create your index
           </h1>
         </div>
       </div>
     </div>
-    <div>
-      <div class="flex justify-center bg-black opacity-70">
-        <div class="mt-20">
-          <TextEditor />
-          <v-button>
-            <div class="button-styling text-white font-semibold">
-            <router-link :to="{ name: 'CatalogCreator', props: { images: $route.params.images }, query: { step: 3 } }">Go to Catalog Creator</router-link>
-            </div>
-          </v-button>
+  <div class="flex items-center justify-center bg-black opacity-70">
+  <div class="sheet editor-container w-2/2 h-1/2">
+    <div class="mb-38">
+    <div class="">
+        <TextEditor :images="images" :categories="[]" ref="textEditorList"/>
+     </div>
+   <div class="flex flex-col items-center justify-center my-16">
+          <router-link
+           class="button-styling text-white font-semibold"
+           :to="{
+                  name: 'CatalogCreator',
+                  props: { images: $route.params.images },
+                  query: { step: 3 }
+                }"
+          tag="button"
+          >
+          Go to Catalog Creator
+          </router-link>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+      </div>
 </template>
 
 <script>
@@ -34,11 +42,24 @@ export default {
     TopHeader,
     TextEditor,
   },
-}
+  methods: {
+    goToCatalogCreator() {
+      this.$router.push({
+        name: 'CatalogCreator',
+        props: { images: this.$route.params.images },
+        query: { step: 3 },
+      });
+    },
+  },
+};
 </script>
 
 
-<style>
+<style scoped>
+/*Sheet margin-top*/
+.sheet {
+  margin-top: 4rem;
+}
 .button-styling {
  cursor: pointer;
  padding: 10px 15px;

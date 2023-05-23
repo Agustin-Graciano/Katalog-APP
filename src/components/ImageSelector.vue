@@ -1,11 +1,10 @@
 <template>
   <div>
-    <button @click="showImages">Show Images</button>
+    <button @click="showImages"></button>
     <div v-if="showPopup">
-      <h2>Uploaded Images</h2>
       <div v-for="imageUrl in imageUrls" :key="imageUrl">
         <img :src="imageUrl" alt="Uploaded Image">
-        <button class="bg-black text-white rounded my-2" @click="selectImage(imageUrl)">Add Image</button>
+        <button class="bg-black text-white rounded my-2" @click="selectImage(imageUrl)"></button>
       </div>
     </div>
   </div>

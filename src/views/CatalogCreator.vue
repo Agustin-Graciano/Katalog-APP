@@ -1,36 +1,36 @@
 <template>
-  <div>
     <TopHeader />
     <div class="flex justify-center items-center">
       <div class="flex bg-black opacity-70 w-full h-full justify-center z-20">
         <div class="flex absolute items-center text-center">
-          <h1 class="text-white text-3xl font-bold py-6 drop-shadow-sm">
+          <h1 class="text-white text-3xl font-bold my-5 drop-shadow-sm">
             Create your catalog
           </h1>
         </div>
       </div>
     </div>
-    <div class="flex justify-center bg-black opacity-70">
-      <div class="mt-20">
-        <ImageSelector @image-selected="addImage" />
-        <TextEditorList :images="images" />
-      </div>
-    </div>
-
-    <!-- Button to open modal -->
-    <button class="fixed bottom-10 right-10 py-2 px-2 rounded-full bg-green-500 bg-black text-white" @click="openModal">
-      Open to see uploaded images
-    </button>
-
-    <!-- Modal -->
-    <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="showModal">
-      <div class="bg-white rounded-lg p-6">
-        <h2 class="text-lg font-semibold mb-4">Image Selector</h2>
-        <ImageSelector @image-selected="addImageToEditor" />
-        <button class="mt-4 px-4 py-2 rounded-lg bg-red-500 bg-black text-white" @click="closeModal">Close</button>
+    <div class="flex items-center justify-center bg-black opacity-70">
+    <div class="sheet editor-container w-2/2 h-1/2">
+    <div class="">
+        <TextEditorList :images="images" :categories="[]" ref="textEditorList"/>
+     </div>
+      <div class="flex flex-col items-center justify-center my-2">
+        <router-link
+           class="button-styling text-white font-semibold"
+           :to="{
+                  name: 'CatalogDownloader',
+                  props: { images: $route.params.images },
+                  query: { step: 4 }
+                }"
+          tag="button"
+          >
+          Go to Finish Catalog
+          </router-link>
       </div>
     </div>
   </div>
+  
+
 </template>
 
 <script>
@@ -38,6 +38,7 @@ import TopHeader from '../components/TopHeader.vue';
 import ImageSelector from '../components/ImageSelector.vue';
 import TextEditorList from '../components/TextEditorList.vue';
 import { mapState, mapMutations } from 'vuex';
+import jsPDF from 'jspdf';
 
 export default {
   components: {
@@ -63,13 +64,50 @@ export default {
     },
     addImage(image) {
       this.images.push(image);
+      console.log('add image function')
     },
     ...mapMutations(['addImage']),
     addImageToStore(image) {
       this.addImage(image);
     },
+    addImageToEditor(imageUrl) {
+      this.$store.commit('setImage', imageUrl)
+      console.log('add image to editor', imageUrl, this.$refs.textEditorList)
+    },
+    async downloadAsPdf() {
+      // Create a new jsPDF instance
+      const pdf = new jsPDF();
+      // Wait for the next tick to ensure that the ref is available
+      await this.$nextTick();
+      // Access the ref and call the getContent method
+      const content = this.$refs.textEditorList.getContent();
+      // Convert the content to PDF format
+      pdf.text(content, 10, 10); // Adjust the position and styling as needed
+      // Save the PDF file
+      pdf.save('catalog.pdf');
+    }
   },
 }
 </script>
 
+<style scoped>
+/*Sheet margin-top*/
+.sheet {
+  margin-top: 5rem;
+}
+
+/*buttons styling*/ 
+.button-styling {
+ cursor: pointer;
+ padding: 10px 15px;
+ font-size: 17px;
+ border-radius: 0.5em;
+ background: #646464;
+ transition: all .3s;
+}
+.button-styling:active {
+ box-shadow: inset 4px 4px 12px #000000,
+             inset -4px -4px 12px #000000;
+}
+</style>
   
