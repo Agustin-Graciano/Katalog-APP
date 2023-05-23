@@ -1,6 +1,6 @@
   <template>
     <div class=" bg-black px-1 py-5">
-      <img src="../assets/Katalog-App Logo.png" alt="Katalog-App Logo" class="ml-5 rounded-sm small-image"/>
+      <img src="../assets/Katalog-App.png" alt="Katalog-App" class="ml-5 rounded-sm small-image" />
     </div>
   </template>
   
