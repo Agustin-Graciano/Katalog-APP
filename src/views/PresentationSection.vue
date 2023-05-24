@@ -33,20 +33,20 @@
               @click="$refs.fileInput.click()">
               Add Presentation Image
          </v-button>
-         <div class="inline-row space-x-2">
-         <v-button   v-if="selectedImage"
-                    class="button-styling text-white font-semibold"
-                    @click="goToIndex">
-                    Go to Index
+         <div class="flex inline-row space-x-2">
+           <v-button   v-if="selectedImage"
+                      class="button-styling text-white font-semibold"
+                      @click="goToIndex">
+                      Go to Index
+           </v-button>
+           <v-button
+                v-if="selectedImage"
+                class="button-styling text-white font-semibold"
+                @click="downloadPDF"
+                >
+               <svg-icon type="mdi" :path="path"></svg-icon>
          </v-button>
-         <v-button
-                   v-if="selectedImage"
-                   class="button-styling text-white font-semibold"
-                   @click="downloadPDF"
-                   >
-                   D
-         </v-button>
-        </div>
+         </div>
       </div>
     </div>
   </div>
@@ -57,14 +57,18 @@ import TopHeader from '../components/TopHeader.vue';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { mapMutations } from 'vuex';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiDownload } from '@mdi/js';
 
 export default {
   components: {
     TopHeader,
+    SvgIcon,
   },
   data() {
     return {
       selectedImage: null,
+      path: mdiDownload,
     };
   },
   methods: {

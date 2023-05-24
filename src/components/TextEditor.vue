@@ -54,7 +54,7 @@ export default {
   },
   created() {
     // Fetch the products data and assign it to the products array
-    axios.get('https://65.109.137.46:5000/api')
+    axios.get('http://65.109.137.46:5000/api')
       .then(response => {
         this.products = response.data;
       })
@@ -307,7 +307,7 @@ export default {
   fetchData() {
       // Make the GET request using Axios
       axios
-        .get('https://65.109.137.46:5000/api', {
+        .get('http://65.109.137.46:5000/api', {
           params: {
             search: this.searchOption, // pass the search option as a query parameter
           },
@@ -319,7 +319,7 @@ export default {
           // Update your array of objects with the products data
           this.$store.state.products = products.map(product => {
             return {
-              imageUrl: `https://65.109.137.46:5000/img/${product.ProductIndex}_0`,
+              imageUrl: `http://65.109.137.46:5000/img/${product.ProductIndex}_0`,
               productIndex: product.ProductIndex,
               productName: product.ProductName,
               price: product.Price,

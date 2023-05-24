@@ -14,23 +14,16 @@
   <div class="">
       <TextEditorList :images="images" :categories="[]" ref="textEditorList"/>
    </div>
-    <div class="flex flex-col items-center justify-center my-2">
-      <router-link
-         class="button-styling text-white font-semibold"
-         :to="{
-                name: 'CatalogDownloaderDB',
-                props: { images: $route.params.images },
-                query: { step: 4 }
-              }"
-        tag="button"
-        >
-        Go to Finish Catalog
-        </router-link>
+   <div class="flex flex-col items-center justify-center my-5 mb-28">
+  <button
+    class="button-styling text-white font-semibold"
+    @click="redirectToPage()"
+  >
+    Go to Finish Catalog
+  </button>
+     </div>
     </div>
   </div>
-</div>
-
-
 </template>
 
 <script>
@@ -56,6 +49,9 @@ data() {
   }
 },
 methods: {
+  redirectToPage() {
+      window.location.href = "https://tools.pdf24.org/en/merge-pdf";
+    },
   openModal() {
     this.showModal = true;
   },
@@ -85,7 +81,7 @@ methods: {
     pdf.text(content, 10, 10); // Adjust the position and styling as needed
     // Save the PDF file
     pdf.save('catalog.pdf');
-  }
+  },
 },
 }
 </script>
