@@ -18,6 +18,7 @@
   
   <script>
   import { mapState } from 'vuex';
+  import axios from 'axios';
   
   export default {
     data() {
@@ -32,7 +33,7 @@
         if (searchTerm === '') {
           return [];
         } else {
-          return this.products.filter(product => {
+          return this.products.filter((product) => {
             const productName = product.productName.toLowerCase();
             return productName.includes(searchTerm);
           });
@@ -42,16 +43,36 @@
     methods: {
       copyProduct(product) {
         const copiedText = `${product.imageUrl} ${product.productName} - ${product.price}.kr`;
-        navigator.clipboard.writeText(copiedText)
+        navigator.clipboard
+          .writeText(copiedText)
           .then(() => {
-          
+            // Optional: Provide feedback to the user (e.g., show a notification)
+            // You can use your preferred notification mechanism here
+            // For example:
+            // this.showNotification('Product copied!');
           })
           .catch((error) => {
             console.error('Failed to copy product:', error);
+            // Handle any error that occurred during the copying process
           });
       },
       filterProducts() {
-     
+        // Implement your filter logic here if needed
+      },
+    },
+    created() {
+      this.fetchData();
+    },
+    methods: {
+      fetchData() {
+        axios
+          .get('http://65.109.137.46:5000/api')
+          .then((response) => {
+            this.products = response.data;
+          })
+          .catch((error) => {
+            console.error('Error fetching products:', error);
+          });
       },
     },
   };
