@@ -10,17 +10,17 @@
     </div>
   </div>
   <div id="presentation-section" class="flex items-center justify-center bg-black opacity-70">
-    <div class="sheet editor-container w-2/3 h-1/2">
-      <div class="flex flex-col items-center justify-center mb-36">
+    <div class="sheet editor-container sm:w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-1/2">
+      <div class="flex flex-col items-center justify-center mb-8 sm:mb-16 md:mb-24 lg:mb-32 xl:mb-56">
         <div class="w-96 h-96 bg-white rounded-lg flex items-center justify-center mb-8">
           <img v-if="selectedImage" 
                :src="selectedImage" 
                class="w-full h-full object-contain rounded-lg"
           />
-            <div v-else class="text-gray-500 font-bold text-4xl relative">
-           <div class="absolute inset-10 rounded-full shadow-lg"></div>
-          <div class="relative z-10 flex items-center justify-center w-full h-full">+</div>
-         </div>
+          <div v-else class="text-gray-500 font-bold text-4xl relative">
+            <div class="absolute inset-10 rounded-full shadow-lg"></div>
+            <div class="relative z-10 flex items-center justify-center w-full h-full">+</div>
+          </div>
         </div>
         <input ref="fileInput" 
                type="file"
@@ -45,7 +45,7 @@
                 @click="downloadPDF"
                 >
                <svg-icon type="mdi" :path="path"></svg-icon>
-         </v-button>
+           </v-button>
          </div>
       </div>
     </div>

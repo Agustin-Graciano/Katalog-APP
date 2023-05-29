@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="flex items-center justify-center bg-black opacity-70">
-    <div class="sheet editor-container w-2/2 h-1/2">
+    <div class="sheet editor-container w-2/2 h-1/2 mb-8 sm:mb-16 md:mb-24 lg:mb-32 xl:mb-56">
     <div class="">
       <TextEditorList :images="images" :categories="[]" ref="textEditorList"/>
    </div>

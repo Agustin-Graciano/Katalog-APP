@@ -5,21 +5,9 @@
         <button class="text-black bg-white round-lg mx-5" @click="addMainCategory">Add Main Category</button>
         <button class="text-black bg-white mx-5" @click="addSubcategory">Add Subcategory</button>
         <button class="text-black bg-white mx-5" @click="deleteCategory">Delete Category</button>
-        <div class="dropdown-container">
-          <input type="text" v-model="searchOption" @input="filterProducts" placeholder="DB Search" class="search-input" />
-             <div class="dropdown">
-               <div v-for="product in computedFilteredProducts" :key="product.productIndex" class="dropdown-item">
-                <div class="product-info">
-                  <a :href="product.linkUrl">
-                   <img :src="product.imageUrl" alt="ProdImg" class="product-image px-2">
-                    </a>
-                  <h3 class="product-title px-2 center">{{ product.productName }}</h3>
-                  <p class="product-price center px-2 center">{{ product.price }} kr.</p>
-                  <button class="product-button rounded-xl px-2 center" @click="copyProduct(product)">Copy</button>
-                </div>
-            </div>
-          </div>
-        </div>
+        <div>
+        <Dropdown />
+      </div>
       </div>
     </div>
     <div class="document-editor__editable-container">
@@ -39,8 +27,12 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import axios from 'axios';
+import Dropdown from './Dropdown.vue';
 
 export default {
+  components: {
+    Dropdown,
+  },
   data() {
     return {
       currentCategory: null,
@@ -419,69 +411,6 @@ export default {
   },
 };
 </script>
-
-<style>
-.dropdown-container {
-  position: relative;
-  width: 550px;
-  padding: 5px;
-}
-
-.search-input {
-  width: 100%;
-  height: 30px;
-  font-size: 16px;
-}
-
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 20;
-  width: 550px;
-  max-height: 100px;
-  overflow-y: auto;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.dropdown-item {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.dropdown-item:hover {
-  background-color: #f2f2f2;
-}
-
-.document-editor__page-indicator {
-  font-size: 14px;
-  font-weight: bold;
-  margin-right: 16px;
-}
-
-.product-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 40px; /* Adjust the height value as needed */
-}
-
-.product-image,
-.product-title,
-.product-price{
-  padding: 0.2em;
-}
-.product-button {
-  padding: 0.2em;
-  font-size: 12px;
-  justify-items: flex-start;
-  color: white;
-  background-color: grey;
-}
-</style>
 
 <style scoped>
 .document-editor {

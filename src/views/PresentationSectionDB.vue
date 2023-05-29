@@ -1,39 +1,39 @@
 <template>
-    <TopHeader />
-    <div class="flex justify-center items-center">
-      <div class="flex bg-black opacity-70 w-full h-full justify-center z-10">
-        <div class="flex absolute items-center text-center">
-          <h1 class="text-white text-3xl font-bold py-6 drop-shadow-sm">
-            Add a catalog presentation
-          </h1>
-        </div>
+  <TopHeader />
+  <div class="flex justify-center items-center">
+    <div class="flex bg-black opacity-70 w-full h-full justify-center z-10">
+      <div class="flex absolute items-center text-center">
+        <h1 class="text-white text-3xl font-bold py-6 drop-shadow-sm">
+          Add a catalog presentation
+        </h1>
       </div>
     </div>
-    <div id="presentation-section" class="flex items-center justify-center bg-black opacity-70">
-      <div class="sheet editor-container w-2/3 h-1/2">
-        <div class="flex flex-col items-center justify-center mb-36">
-          <div class="w-96 h-96 bg-white rounded-lg flex items-center justify-center mb-8">
-            <img v-if="selectedImage" 
-                 :src="selectedImage" 
-                 class="w-full h-full object-contain rounded-lg"
-            />
-              <div v-else class="text-gray-500 font-bold text-4xl relative">
-             <div class="absolute inset-10 rounded-full shadow-lg"></div>
+  </div>
+  <div id="presentation-section" class="flex items-center justify-center bg-black opacity-70">
+    <div class="sheet editor-container sm:w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-1/2">
+      <div class="flex flex-col items-center justify-center mb-8 sm:mb-16 md:mb-24 lg:mb-32 xl:mb-56">
+        <div class="w-96 h-96 bg-white rounded-lg flex items-center justify-center mb-8">
+          <img v-if="selectedImage" 
+               :src="selectedImage" 
+               class="w-full h-full object-contain rounded-lg"
+          />
+          <div v-else class="text-gray-500 font-bold text-4xl relative">
+            <div class="absolute inset-10 rounded-full shadow-lg"></div>
             <div class="relative z-10 flex items-center justify-center w-full h-full">+</div>
-           </div>
           </div>
-          <input ref="fileInput" 
-                 type="file"
-                 class="hidden"
-                 @change="onFileSelected" 
-                 accept="image/*" 
-           />
-           <v-button 
-                class="button-styling text-white font-semibold -mt-5 mb-4" 
-                @click="$refs.fileInput.click()">
-                Add Presentation Image
-           </v-button>
-           <div class="flex inline-row space-x-2">
+        </div>
+        <input ref="fileInput" 
+               type="file"
+               class="hidden"
+               @change="onFileSelected" 
+               accept="image/*" 
+         />
+         <v-button 
+              class="button-styling text-white font-semibold -mt-5 mb-4" 
+              @click="$refs.fileInput.click()">
+              Add Presentation Image
+         </v-button>
+         <div class="flex inline-row space-x-2">
            <v-button   v-if="selectedImage"
                       class="button-styling text-white font-semibold"
                       @click="goToIndexDB">
@@ -45,12 +45,13 @@
                 @click="downloadPDF"
                 >
                <svg-icon type="mdi" :path="path"></svg-icon>
-         </v-button>
+           </v-button>
          </div>
-        </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
   <script>
   import TopHeader from '../components/TopHeader.vue';
