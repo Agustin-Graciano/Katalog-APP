@@ -3,8 +3,8 @@
     <div class="document-editor__toolbar bg-white">
       <div class="flex justify-start">
         <button class="text-black bg-white round-lg mx-5" @click="addMainCategory">Add Main Category</button>
-        <button class="text-black bg-white mx-5" @click="addSubcategory">Add Subcategory</button>
-        <button class="text-black bg-white mx-5" @click="deleteCategory">Delete Category</button>
+        <button class="text-black bg-white mx-5 bold" @click="addSubcategory">Add Subcategory</button>
+        <button class="text-black bg-white mx-5 bold" @click="deleteCategory">Delete Category</button>
         <div>
         <Dropdown />
       </div>

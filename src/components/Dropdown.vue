@@ -78,7 +78,7 @@
   };
   </script>
   
-<style scoped>
+<style>
 .dropdown-container {
   position: relative;
   width: 550px;
